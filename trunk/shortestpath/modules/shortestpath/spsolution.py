@@ -68,11 +68,11 @@ class SPSolution(Solution):
             p.add(self.generateRandomSPOrganism())
         return p
 
-    def bestIterator(self):
+    def populationIterator(self):
         population = self.generateInitPopulation()
         for i in range(self.populationCount):
             population.generate()
-            yield population.best()
+            yield population
 
     def solve(self):
         '''

@@ -1,10 +1,25 @@
 
+DIRECTORY_PATH = 'applications/shortestpath/static/population_log/'
+FILENAME_PREFIX = 'population'
+FILE_EXTENSION = '.txt'
+WEB_PATH = '../static/population_log/'
+
 MIN_VERTEX_COUNT = 10
 MAX_VERTEX_COUNT = 101
 CELL_PREFIX = 'cell'
 CELL_SEP = '_'
 
 def index():
+    def cleanDirectory():
+        import os
+        files = os.listdir(DIRECTORY_PATH)
+        for x in files:
+            fullpath = os.path.join(DIRECTORY_PATH, x)
+            if os.path.isfile(fullpath):
+                f = os.remove(fullpath)
+
+    cleanDirectory()
+
     size_onchange = "ajax('" + URL(r=request, f='drawTable') + "',['size'],'graph_table');"
     size = SELECT(_name='size', _value='10', value='10', _id='size', _class='integer',
                   requires=IS_INT_IN_RANGE(MIN_VERTEX_COUNT, MAX_VERTEX_COUNT),
@@ -107,11 +122,12 @@ def dejkstra():
     g = Graph(session.vars['graph'])
     result = g.findShortestPathDijkstra(session.vars['start_vertex'],
                                         session.vars['stop_vertex'])
-    return TABLE(TR(str(result) + ' ' + str(g.pathCost(result)))).xml()
+    return TABLE(TR('Best: ' + str(result) + ' ' + str(g.pathCost(result)))).xml()
 
 def go():
     from applications.shortestpath.modules.shortestpath.graph import Graph
     from applications.shortestpath.modules.shortestpath.spsolution import SPSolution
+    import logging
     sps = SPSolution(Graph(session.vars['graph']), session.vars['start_vertex'],
                      session.vars['stop_vertex'],
                      initPopulationLength=session.vars['init_population_length'],
@@ -121,8 +137,21 @@ def go():
                      childCount=session.vars['child_count'],
                      goodParents=session.vars['good_parents'],
                      mutants=session.vars['mutants'])
-    results = [str(i) + ' ' + str(i.fitness()) for i in sps.bestIterator()]
+    results = []
+    count = 0
+    for pop in sps.populationIterator():
+        writePopulationToFile(pop, count)
+        results.append(A('Population ' + str(count) + ' Best: ' + str(pop.best()) + ' ' + str(pop.best().fitness()),
+                         _href=WEB_PATH + FILENAME_PREFIX + str(count) + FILE_EXTENSION,
+                         _target='_blank'))
+        count += 1
     return TABLE(*[TR(r) for r in results]).xml()
+
+def writePopulationToFile(population, number):
+    file_name = FILENAME_PREFIX + str(number) + FILE_EXTENSION
+    with open(DIRECTORY_PATH + file_name, 'w') as f:
+        for org in population:
+            f.write(str(org) + ' ' + str(org.fitness()) + '\n\r')
 
 def drawFilledTable():
     try:
