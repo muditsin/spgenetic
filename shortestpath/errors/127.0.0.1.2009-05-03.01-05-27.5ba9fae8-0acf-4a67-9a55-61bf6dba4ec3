@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py'
+p4
+sS'code'
+p5
+S"\ndef index():\n    form = FORM(DIV(makeTable(), _id='graph_table'),\n                INPUT(_type='submit', _value='GO'))\n\n    if form.accepts(request.vars, session):\n        print(request.vars.graph)\n\n    return dict(form=form)\n\n\ndef makeTable(numVertex=10):\n    trs = [TR(*[i for i in range(numVertex)])]\n    for i in range(numVertex):\n        tds = i + [INPUT(_type='text', _name='graph', _size=1) for i in range(numVertex)]\n        trs.append(TR(*tds))\n    return TABLE(*trs)\n\n\nresponse._vars=response._caller(index)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/opedge/workspace/web2py/gluon/restricted.py", line 98, in restricted\n    exec ccode in environment\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 20, in <module>\n  File "/home/opedge/workspace/web2py/gluon/globals.py", line 75, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 3, in index\n    form = FORM(DIV(makeTable(), _id=\'graph_table\'),\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 15, in makeTable\n    tds = i + [INPUT(_type=\'text\', _name=\'graph\', _size=1) for i in range(numVertex)]\nTypeError: unsupported operand type(s) for +: \'int\' and \'list\'\n'
+p8
+s.

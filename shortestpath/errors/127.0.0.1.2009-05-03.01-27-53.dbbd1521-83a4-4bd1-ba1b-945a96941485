@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py'
+p4
+sS'code'
+p5
+S"\ndef index():\n    vertexes = range(10, 101, 1)\n    form = FORM(DIV(makeTable(), _id='graph_table'),\n                SELECT(_name='size', requires=IS_IN_RANGE(10, 101), *vertexes),\n                INPUT(_type='submit', _value='GO'))\n\n    if form.accepts(request.vars, session):\n        print(request.vars.graph)\n\n    return dict(form=form)\n\n\ndef makeTable(numVertex=10):\n    trs = [TR('', *[x for x in range(numVertex)])]\n    for i in range(numVertex):\n        tds = [INPUT(_type='text', _name='graph', _size=1) for x in range(numVertex)]\n        trs.append(TR(i, *tds))\n    return TABLE(*trs)\n\n\nresponse._vars=response._caller(index)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/opedge/workspace/web2py/gluon/restricted.py", line 98, in restricted\n    exec ccode in environment\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 22, in <module>\n  File "/home/opedge/workspace/web2py/gluon/globals.py", line 75, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 5, in index\n    SELECT(_name=\'size\', requires=IS_IN_RANGE(10, 101), *vertexes),\nNameError: global name \'IS_IN_RANGE\' is not defined\n'
+p8
+s.

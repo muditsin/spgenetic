@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py'
+p4
+sS'code'
+p5
+S"\ndef index():\n    trs = []\n    for i in range(3):\n        tds = [INPUT(_type='text', _name='name', _size=1, requires=IS_INT()) for i in range(3)]\n        trs.append(TR(*tds))\n    form = FORM(TABLE(*trs), INPUT(_type='submit', _value='SUBMIT'))\n\n    if form.accepts(request.vars, session):\n        print(request.vars)\n\n    return dict(form=form)\n\n\nresponse._vars=response._caller(index)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/opedge/workspace/web2py/gluon/restricted.py", line 98, in restricted\n    exec ccode in environment\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 15, in <module>\n  File "/home/opedge/workspace/web2py/gluon/globals.py", line 75, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 5, in index\n    tds = [INPUT(_type=\'text\', _name=\'name\', _size=1, requires=IS_INT()) for i in range(3)]\nNameError: global name \'IS_INT\' is not defined\n'
+p8
+s.

@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py'
+p4
+sS'code'
+p5
+S'\ndef index():\n    onchange = "ajax(\'" + URL(r=request, f=\'drawTable\') + "\',[\'tsize\'],\'graph_table\');"\n    form = FORM(DIV(makeTable(), _id=\'graph_table\'),\n                SELECT(_id=\'tsize\', requires=IS_INT_IN_RANGE(10, 101),\n                       _onchange=onchange, *range(10, 101, 1)),\n                INPUT(_type=\'submit\', _value=\'GO\'))\n\n    if form.accepts(request.vars, session):\n        print(request.vars)\n    #TODO: think how to kill filling cells after submitting form\n\n    return dict(form=form)\n\ndef makeTable(numVertex=10):\n    trs = [TR(\'\', *[x for x in range(numVertex)])]\n    for i in range(numVertex):\n        tds = []\n        for k in range(numVertex):\n            tds.append(INPUT(_class=\'integer\', _id=\'cell\' + k + i, _name=\'graph\', _size=1, _value=0))\n        trs.append(TR(i, *tds))\n    return TABLE(*trs)\n\ndef drawTable():\n    return makeTable(int(request.vars.tsize)).xml()\n\n\nresponse._vars=response._caller(index)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/opedge/workspace/web2py/gluon/restricted.py", line 98, in restricted\n    exec ccode in environment\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 28, in <module>\n  File "/home/opedge/workspace/web2py/gluon/globals.py", line 75, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 4, in index\n    form = FORM(DIV(makeTable(), _id=\'graph_table\'),\n  File "/home/opedge/workspace/web2py/applications/shortestpath/controllers/app.py", line 20, in makeTable\n    tds.append(INPUT(_class=\'integer\', _id=\'cell\' + k + i, _name=\'graph\', _size=1, _value=0))\nTypeError: cannot concatenate \'str\' and \'int\' objects\n'
+p8
+s.
