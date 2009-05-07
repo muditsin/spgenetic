@@ -67,7 +67,6 @@ class Population:
         nadults = len(self)
         n2adults = nadults * nadults
 
-        #wild orgy
         for i in range(nchildren):
             #pick random parent
             i1 = i2 = int(sqrt(randrange(n2adults)))
@@ -77,6 +76,7 @@ class Population:
                 i2 = int(sqrt(randrange(n2adults)))
             parent2 = self[-i2]
 
+            #crossing
             child1, child2 = parent1 + parent2
 
             children.extend([child1, child2])
