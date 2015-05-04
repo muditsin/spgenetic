@@ -1,0 +1,1 @@
+Web application written in python with help of web2py framework.
